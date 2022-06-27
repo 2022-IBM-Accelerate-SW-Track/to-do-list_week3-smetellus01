@@ -67,8 +67,11 @@ test('test that App component renders Task', () => {
  test('test that App component doesn\'t add a task without due date', () => {
   render(<App />);
   const inputTask = screen.getByRole('textbox', {name: /Add New Item/i});
+  const inputDate = screen.getByPlaceholderText("mm/dd/yyyy");
   const element = screen.getByRole('button', {name: /Add/i});
+  const dueDate = "05/30/2023";
   fireEvent.change(inputTask, {target : {value: "Complete my IBM Homework"}});
+  fireEvent.change(inputDate, { target: { value: null}});
   fireEvent.click(element);
   const check = screen.getByText(/You have no todo's left/i);
   expect(check).toBeInTheDocument();
@@ -95,11 +98,11 @@ test('test that App component renders Task', () => {
  test('test that App component renders different colors for past due events', () => {
   render(<App />);
   const inputTask = screen.getByRole('textbox', {name: /Add New Item/i});
-  const inputDate = screen.getByPlaceholderText("mm/dd/yyyy");
+  const inputDate = screen.getByPlaceholderText("mm/dd/yyyy")
   const element = screen.getByRole('button', {name: /Add/i});
   const dueDate = "05/30/2022";
-  fireEvent.change(inputTask, { target: { value : "Complete my IBM Homework"}});
-  fireEvent.change(inputDate, { target: { value: dueDate}});
+  fireEvent.change(inputTask, { target: { value : "Complete my IBM Homework"}})
+  fireEvent.change(inputDate, { target: { value: dueDate}})
   fireEvent.click(element);
 
   const check = screen.getByTestId(/Complete my IBM Homework/i).style.background;
