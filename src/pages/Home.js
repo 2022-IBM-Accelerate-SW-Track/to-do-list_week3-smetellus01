@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Todos from "../component/todos";
 import AddTodo from "../component/AddTodo";
 import "../pages/Home.css";
+import { getNativeSelectUtilityClasses } from "@mui/material";
 
 class Home extends Component {
   // Create a default state of this component with an empty list of todos.
@@ -30,6 +31,8 @@ class Home extends Component {
   addTodo = (todo) => {
     const exists = this.state.todos.find(t => t.content === todo.content);
     if (exists){ return }
+
+    if(todo.dueDate === "Invalid Date" || todo.dueDate === null) {return}
     // In React, keys or ids in a list help identify which items have changed, been added or removed. Keys
     // should not share duplicate values.
     // To avoid having dup values, we use the Math.random() function to generate a random value for a todo id.
@@ -59,3 +62,6 @@ class Home extends Component {
 }
 
 export default Home;
+
+
+// if(todo.date == null ||  )
